@@ -2,22 +2,13 @@ package blevedemo
 
 import (
 	"encoding/csv"
+	"fmt"
 	"io"
 	"os"
 	"strconv"
 
 	"github.com/PuerkitoBio/goquery"
 )
-
-type Page struct {
-	Title   string `json:"title"`
-	Content string `json:"content"`
-	Tags    string `json:"tags"`
-}
-
-func (p Page) Type() string {
-	return "page"
-}
 
 func Index(filePath string) error {
 	file, fileError := os.Open(filePath)
@@ -43,7 +34,8 @@ func Index(filePath string) error {
 
 		doc, docErr := goquery.NewDocument("http://" + data[0])
 		if docErr != nil {
-			return docErr
+			fmt.Println("Error: ", data[0], docErr.Error())
+			continue
 		}
 
 		if indexErr := indexer.Index(strconv.Itoa(count), Page{

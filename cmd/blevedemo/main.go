@@ -12,6 +12,10 @@ func main() {
 	mux.Handle("/", http.FileServer(http.Dir("../../public")))
 	mux.HandleFunc("/search", bd.Search)
 
+	if bleveErr := bd.Init(); bleveErr != nil {
+		panic(bleveErr)
+	}
+
 	go func() {
 		if indexErr := bd.Index("../../public/sites.csv"); indexErr != nil {
 			panic(indexErr)
