@@ -14,5 +14,6 @@
 .glide/
 data
 
+*.index
 .DS_Store
 *.swp
