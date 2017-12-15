@@ -60,3 +60,16 @@ button:focus {
   border: 1px solid #000;
   background-color: #000;
 }
+
+.Result {
+  position: relative;
+  width: 90%;
+  height: auto;
+  margin-bottom: 20px;
+}
+
+.Id, .Field {
+  position: relative;
+  width: 100%;
+  height: 20px;
+}
