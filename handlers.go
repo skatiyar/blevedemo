@@ -16,7 +16,13 @@ func Search(rw http.ResponseWriter, req *http.Request) {
 	}
 
 	rawQuery := req.URL.Query().Get("q")
-	result, resultErr := indexer.Search(bleve.NewSearchRequest(query.NewQueryStringQuery(rawQuery)))
+	searchReq := bleve.NewSearchRequest(query.NewQueryStringQuery(rawQuery))
+	// Set result size
+	searchReq.Size = 30
+	// Enable highlighting
+	searchReq.Highlight = bleve.NewHighlight()
+
+	result, resultErr := indexer.Search(searchReq)
 	if resultErr != nil {
 		rw.WriteHeader(400)
 		rw.Write([]byte(resultErr.Error()))
