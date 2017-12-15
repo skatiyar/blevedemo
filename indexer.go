@@ -56,5 +56,4 @@ func Index(filePath string) error {
 
 		count += 1
 	}
-
 }
